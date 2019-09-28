@@ -9,6 +9,8 @@ const myRequest = require('@artemkv/myrequest');
 const version = require('./myversion');
 const logger = require('@artemkv/logger');
 const health = require('@artemkv/health');
+const actionController = require('./actioncontroller');
+const errorController = require('./errorcontroller');
 
 dotenv.config();
 
@@ -39,7 +41,8 @@ server
     .use('/stats', restStats.getStats)
 
     // Do business
-    // TODO:
+    .use('/action', actionController.postAction)
+    .use('/apperror', errorController.postError)
 
     // Handles errors
     .use(function (err, req, res, next) {

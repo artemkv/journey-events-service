@@ -24,7 +24,7 @@ Pre-defined actions:
 
 
 ```
-POST /error
+POST /apperror
 
 {
   "aid" : "9735965b-e1cb-4d7f-adb9-a4adf457f61a",
@@ -39,4 +39,6 @@ POST /error
 ```
 NODE_PORT=8600
 NODE_IP=localhost
+ACTION_TOPIC=projects/journey-250514/topics/action-topic
+ERROR_TOPIC=projects/journey-250514/topics/error-topic
 ```
