@@ -69,4 +69,46 @@ describe('[REST Api Test Suite]', function () {
             done();
         });
     });
+
+    it(':) Post action', function (done) {
+        let action = {
+            "aid": "9735965b-e1cb-4d7f-adb9-a4adf457f61a",
+            "uid": "ceb2a540-48c7-40ec-bc22-24ffd54d880d",
+            "act": "act_complete_trial",
+            "par": "dummy"
+        };
+        let options = {
+            url: `${SERVICE_URL}/action`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: Buffer.from(JSON.stringify(action))
+        };
+        request.post(options, function (error, response, body) {
+            expect(response.statusCode).to.equal(200);
+
+            done();
+        });
+    });
+
+    it(':) Post error', function (done) {
+        let error = {
+            "aid" : "9735965b-e1cb-4d7f-adb9-a4adf457f61a",
+            "uid" : "ceb2a540-48c7-40ec-bc22-24ffd54d880d",
+            "msg" : "divide by zero",
+            "dtl" : "amF2YS5sYW5nLklsbGVnYWxTdGF0ZU..."
+          };
+        let options = {
+            url: `${SERVICE_URL}/apperror`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: Buffer.from(JSON.stringify(error))
+        };
+        request.post(options, function (error, response, body) {
+            expect(response.statusCode).to.equal(200);
+
+            done();
+        });
+    });
 });
