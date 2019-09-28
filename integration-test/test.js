@@ -14,6 +14,20 @@ describe('[REST Api Test Suite]', function () {
         });
     });
 
+    it(':) Liveness probe', function (done) {
+        request.get(`${SERVICE_URL}/liveness`, function (error, response, body) {
+            expect(response.statusCode).to.equal(200);
+            done();
+        });
+    });
+
+    it(':) Readiness probe', function (done) {
+        request.get(`${SERVICE_URL}/readiness`, function (error, response, body) {
+            expect(response.statusCode).to.equal(200);
+            done();
+        });
+    });
+
     it(':( Try accessing root', function (done) {
         request.get(SERVICE_URL, function (error, response, body) {
             expect(response.statusCode).to.equal(404);

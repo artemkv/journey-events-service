@@ -28,6 +28,8 @@ server
 
     // Used for testing / health checks
     .use('/health', health.handleHealthCheck)
+    .use('/liveness', health.handleLivenessCheck)
+    .use('/readiness', health.handleReadinessCheck)
     .use('/error', errorHandler.handleError)
     .use('/resterror', errorHandler.handleRestError)
 
@@ -64,4 +66,7 @@ server.listen(port, ip, function () {
     logger.initialize(`${__dirname}/log`);
     logger.log('Application started: http://' + ip + ":" + port + '/');
     restStats.initialize(version);
+
+    // everything has been initialized
+    health.setIsReady();
 });
