@@ -17,7 +17,7 @@
     "@artemkv/statuscodes": "1.0.2",
     "@artemkv/statusmessages": "1.0.0",
     "@artemkv/health": "1.1.1",
-    "@artemkv/logger": "1.1.0",
+    "@artemkv/consolelogger": "1.0.1",
     "connect": "3.6.6",
     "content-type": "^1.0.4",
     "dotenv": "^6.2.0",
