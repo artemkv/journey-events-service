@@ -38,6 +38,7 @@
     "integration-test": "wait-on http://localhost:8600/stats && mocha integration-test",
     "test": "cross-env NODE_ENV=test mocha",
     "docker-build": "docker build -t artemkv/journey-events-service:latest .",
+    "docker-build-tagged": "docker build -t artemkv/journey-events-service:latest -t artemkv/journey-events-service:${SHORT_HASH} .",
     "docker-push": "docker push artemkv/journey-events-service:latest"
   }
 }
