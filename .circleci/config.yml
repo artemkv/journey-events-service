@@ -51,7 +51,7 @@ jobs:
             NODE_ENV=test npm start &
             npm run integration-test
 
-      - run: npm run docker-build-tagged
+      - run: npm run docker-build
 
       - deploy:
           name: Publish docker image to docker hub
