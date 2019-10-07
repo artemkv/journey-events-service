@@ -19,7 +19,7 @@ jobs:
     steps:
       name: Setup Environment Variables
       command: |
-        echo "export SHORT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)" >> $BASH_ENV
+        echo "export SHORT_HASH="$(echo $CIRCLE_SHA1 | cut -c -7) >> $BASH_ENV
 
       - checkout
 
