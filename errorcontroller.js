@@ -10,6 +10,18 @@ const readJsonStream = require('@artemkv/readjsonstream');
 const contentTypeParser = require('content-type');
 const pubSubConnector = require('./connectorprovider').getPubSubConnector();
 
+function validateError(error) {
+    if (!error.aid) {
+        throw new RestError(statusCodes.BadRequest, 'missing or empty attribute "aid"');
+    }
+    if (!error.uid) {
+        throw new RestError(statusCodes.BadRequest, 'missing or empty attribute "uid"');
+    }
+    if (!error.msg) {
+        throw new RestError(statusCodes.BadRequest, 'missing or empty attribute "msg"');
+    }
+}
+
 const postError = async function (req, res, next) {
     if (req.method !== 'POST') {
         throw new RestError(statusCodes.MethodNotAllowed, statusMessages.MethodNotAllowed);
@@ -26,6 +38,7 @@ const postError = async function (req, res, next) {
 
     try {
         let error = await new Promise(readJsonStream(req, MAX_LENGTH));
+        validateError(error);
         error.dts = new Date();
         await pubSubConnector.publishError(error);
 
