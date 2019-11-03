@@ -26,7 +26,8 @@ it(':) Post action', function (done) {
     };
 
     let res = {
-        end: verify
+        end: verify,
+        setHeader: () => {}
     };
 
     let counter = pubSubConnector.allCallData.counter;
@@ -71,7 +72,8 @@ it(':) Post action overrides dts with server-generated value', function (done) {
     };
 
     let res = {
-        end: verify
+        end: verify,
+        setHeader: () => {}
     };
 
     let counter = pubSubConnector.allCallData.counter;
@@ -116,7 +118,8 @@ it(':) Post error', function (done) {
     };
 
     let res = {
-        end: verify
+        end: verify,
+        setHeader: () => {}
     };
 
     let counter = pubSubConnector.allCallData.counter;
