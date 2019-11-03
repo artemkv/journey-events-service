@@ -23,6 +23,16 @@ function validateAction(action) {
 }
 
 const postAction = async function (req, res, next) {
+    let origin = req.headers['origin'];
+    if (req.method === 'OPTIONS') {
+        res.statusCode = statusCodes.OK;
+        res.setHeader('Access-Control-Allow-Origin', origin || 'http://localhost');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        res.end();
+        return;
+    }
+
     if (req.method !== 'POST') {
         throw new RestError(statusCodes.MethodNotAllowed, statusMessages.MethodNotAllowed);
     }
@@ -43,6 +53,9 @@ const postAction = async function (req, res, next) {
         await pubSubConnector.publishAction(action);
 
         res.statusCode = statusCodes.OK;
+        res.setHeader('Access-Control-Allow-Origin', origin || 'http://localhost');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
         res.end();
 
         restStats.countRequestByEndpoint("action");

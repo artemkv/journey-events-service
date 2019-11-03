@@ -16,6 +16,12 @@ dotenv.config();
 
 let server = connect();
 
+const asyncHandler = fn => (req, res, next) => {
+    return Promise
+        .resolve(fn(req, res, next))
+        .catch(next);
+};
+
 server
     // favicon
     .use(favicon('./favicon.ico'))
@@ -43,8 +49,8 @@ server
     .use('/stats', restStats.getStats)
 
     // Do business
-    .use('/action', actionController.postAction)
-    .use('/apperror', errorController.postError)
+    .use('/action', asyncHandler(actionController.postAction))
+    .use('/apperror', asyncHandler(errorController.postError))
 
     // Handles errors
     .use(function (err, req, res, next) {
